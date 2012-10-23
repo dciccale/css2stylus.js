@@ -27,13 +27,10 @@ if (keepCssSyntax >= 0) {
 if (path.extname(args[0]) === '.css') {
   args.forEach(function (file) {
     var css = readFile(file, function (css) {
-      var stylusfile;
-      converter = new Css2Stylus.Converter(css);
+      var stylusfile = path.basename(file, path.extname(file)) + '.styl',
+        converter = new Css2Stylus.Converter(css);
       converter.processCss(options);
-      stylusfile = path.basename(file, path.extname(file)) + '.styl';
       fs.writeFile(stylusfile, converter.getStylus());
     });
   });
-} else {
-  // css string?
 }
