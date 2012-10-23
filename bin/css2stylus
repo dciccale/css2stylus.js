@@ -1,3 +1,36 @@
 #!/usr/bin/env node
+var fs = require('fs'),
+  readFile = function (file) {
+    return fs.readFile(file, 'utf-8');
+  },
+  path = require('path'),
+  args = process.argv.slice(2),
+  Css2Stylus = require('../lib/css2stylus'),
+  converter,
+  options = {},
+  keepCssSyntax;
 
-require('../lib/css2stylus')(process.argv);
+  if (!args.length) {
+    console.log('Usage: css2stylus <file1.css file2.css>');
+    process.exit(1);
+  }
+
+  keepCssSyntax = args.indexOf('--cssSyntax');
+  if (keepCssSyntax >= 0) {
+    options.cssSyntax = true;
+    args.splice(keepCssSyntax, 1);
+  }
+
+  if (path.extname(args[0]) === '.css') {
+    args.forEach(function (file) {
+      var css = readFile(file), stylusfile;
+      converter = new Css2Stylus.Converter(css);
+      converter.processCss(options);
+      stylusfile = path.basename(file, path.extname(file)) + '.styl';
+      writeFile(stylusfile, converter.getStylus());
+    });
+  } else {
+    // css string?
+  }
+
+
