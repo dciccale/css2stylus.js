@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 var fs = require('fs'),
-  readFile = function (file) {
-    return fs.readFile(file, 'utf-8');
+  readFile = function (file, callback) {
+    return fs.readFile(file, 'utf-8', function (err, data) {
+      if (err) { throw err; }
+      callback(data);
+    });
   },
   path = require('path'),
   args = process.argv.slice(2),
@@ -10,27 +13,27 @@ var fs = require('fs'),
   options = {},
   keepCssSyntax;
 
-  if (!args.length) {
-    console.log('Usage: css2stylus <file1.css file2.css>');
-    process.exit(1);
-  }
+if (!args.length) {
+  console.log('Usage: css2stylus <file1.css file2.css>');
+  process.exit(1);
+}
 
-  keepCssSyntax = args.indexOf('--cssSyntax');
-  if (keepCssSyntax >= 0) {
-    options.cssSyntax = true;
-    args.splice(keepCssSyntax, 1);
-  }
+keepCssSyntax = args.indexOf('--cssSyntax');
+if (keepCssSyntax >= 0) {
+  options.cssSyntax = true;
+  args.splice(keepCssSyntax, 1);
+}
 
-  if (path.extname(args[0]) === '.css') {
-    args.forEach(function (file) {
-      var css = readFile(file), stylusfile;
+if (path.extname(args[0]) === '.css') {
+  args.forEach(function (file) {
+    var css = readFile(file, function (css) {
+      var stylusfile;
       converter = new Css2Stylus.Converter(css);
       converter.processCss(options);
       stylusfile = path.basename(file, path.extname(file)) + '.styl';
       fs.writeFile(stylusfile, converter.getStylus());
     });
-  } else {
-    // css string?
-  }
-
-
+  });
+} else {
+  // css string?
+}
