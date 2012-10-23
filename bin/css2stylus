@@ -27,7 +27,7 @@ var fs = require('fs'),
       converter = new Css2Stylus.Converter(css);
       converter.processCss(options);
       stylusfile = path.basename(file, path.extname(file)) + '.styl';
-      writeFile(stylusfile, converter.getStylus());
+      fs.writeFile(stylusfile, converter.getStylus());
     });
   } else {
     // css string?
