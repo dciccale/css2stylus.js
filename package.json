@@ -23,6 +23,7 @@
   "bin": {
     "css2stylus": "./bin/css2stylus"
   },
+  "preferGlobal": "true",
   "dependencies": {},
   "devDependencies": {},
   "keywords": ["css2stylus", "css", "stylus", "converter"],
