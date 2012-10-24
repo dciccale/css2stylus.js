@@ -21,4 +21,10 @@ $(function () {
     }
     convert(options);
   });
+
+  $.get('js/demo.css', function (css) {
+    $('#loadsample').click(function () {
+      input.val(css);
+    });
+  });
 });
