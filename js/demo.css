@@ -1,0 +1,17 @@
+body {
+  color: #ccc;
+}
+
+body a {
+  text-decoration: none;
+  color: #666;
+}
+
+body a:hover {
+  text-decoration: underline;
+  color: #333;
+}
+
+body a:active {
+  color: #000;
+}
