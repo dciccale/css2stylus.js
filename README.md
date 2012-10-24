@@ -1,8 +1,12 @@
-# css2stylus.js
+# [css2stylus.js](http://css2stylus.com)
 
 JavaScript utility to convert CSS into Stylus.
 
 Node/Browser compatible.
+
+## Demo
+
+###Try it online http://css2stylus.com
 
 ## Usage
 
