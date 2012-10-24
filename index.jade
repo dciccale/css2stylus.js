@@ -21,8 +21,14 @@ h1 Css2Stylus
     .header
       h2 Paste your CSS
       .controls
-        label Indentation
-          input(type="radio", name="indentation", value="tab")
+        h3 Indentation
+        .radios
+          label tab
+            input(type="radio", name="indentation", value="tab")
+          label 2 spaces
+            input(type="radio", name="indentation", value="2", checked="checked")
+          label 4 spaces
+            input(type="radio", name="indentation", value="4")
     textarea#input
 
   div.col.col-right
