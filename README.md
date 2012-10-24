@@ -6,7 +6,7 @@ Node/Browser compatible.
 
 ## Demo
 
-###Try it online http://css2stylus.com
+###Try it online [css2stylus.com](http://css2stylus.com)
 
 ## Usage
 
