@@ -1,9 +1,9 @@
 {
   "name": "css2stylus",
   "description": "Converts CSS to Stylus.",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "Denis Ciccale (@tdecs)",
-  "homepage": "http://github.com/dciccale/css2stylus.js",
+  "homepage": "http://css2stylus.com",
   "repositories": [
     {
       "type": "git",
