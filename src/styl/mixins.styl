@@ -1,0 +1,34 @@
+prefix(prop, val)
+  -webkit-{prop} val
+  -moz-{prop} val
+  -ms-{prop} val
+  -o-{prop} val
+  {prop} val
+
+box-shadow()
+  prefix('box-shadow', arguments)
+
+border-radius()
+  prefix('border-radius', arguments)
+
+user-select()
+  prefix('user-select', arguments)
+
+transform()
+  prefix('transform', arguments)
+
+transition()
+  prefix('transition', arguments)
+
+opacity(val)
+  opacity val
+  filter unquote('alpha(opacity=' + val * 100 + ')')
+
+selection(bgColor, txtColor, selector='')
+  {selector}::-moz-selection
+    background bgColor
+    color txtColor
+
+  {selector}::selection
+    background bgColor
+    color txtColor

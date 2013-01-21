@@ -1,0 +1,33 @@
+{
+  "name": "css2stylus",
+  "description": "Converts CSS into Stylus.",
+  "version": "0.0.1",
+  "author": "Denis Ciccale (@tdecs)",
+  "homepage": "http://css2stylus.com",
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/dciccale/css2stylus.js.git"
+    }
+  ],
+  "bugs": {
+    "url": "http://github.com/dciccale/css2stylus.js/issues"
+  },
+  "licenses": [
+   {
+     "type": "MIT",
+     "url": "http://github.com/dciccale/css2stylus.js/blob/master/LICENSE.txt"
+   }
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "0.3.x",
+    "grunt-contrib-stylus": "0.3.x",
+    "grunt-contrib-jade": "0.3.x",
+    "grunt-contrib-mincss": "0.3.x"
+  },
+  "keywords": ["css2stylus", "css", "stylus", "converter"],
+  "engines": [
+    "node >= 0.6.0"
+  ]
+}

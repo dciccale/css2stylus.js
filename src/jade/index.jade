@@ -1,0 +1,45 @@
+!!!5
+meta(charset="utf-8")
+title Css2Stylus
+link(href="css/css.css", rel="stylesheet")
+
+h1 Css2Stylus
+
+#main
+  .col.col-left
+    .header
+      h2 Paste your CSS
+      button#loadsample Load sample
+      .controls
+        label tab
+          input(type="radio", name="indentation", value="tab")
+        label 2 spaces
+          input(type="radio", name="indentation", value="2", checked="checked")
+        label 4 spaces
+          input(type="radio", name="indentation", value="4")
+        label unPrefix
+          input(type="checkbox", name="unprefix", id="unprefix")
+    textarea#input
+
+  .col.col-right
+    .header
+      h2 Generated Stylus
+      .controls
+        button#selectall Select all
+    textarea#output
+
+#footer
+  p About the author:
+    a(href="http://twitter.com/tdecs") @tdecs
+
+
+script(src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js")
+script(src="js/demo.min.js")
+//
+  script
+    var _gaq=_gaq||[];_gaq.push(["_setAccount","UA-24098807-9"]);_gaq.push(["_trackPageview"]);(function(){var a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"==document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})();
+
+  #twitterbtn
+    a(href="https://twitter.com/share", class="twitter-share-button", data-text="Convert your #CSS into #Stylus!", data-url="http://css2stylus.com", data-related="tdecs", data-lang="en", data-size="large", data-count="true") Tweet
+    script
+      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");

@@ -1,0 +1,221 @@
+@import reset
+@import normalize
+@import mixins
+
+selection(rgba(0,0,0,0.7), #ccc)
+
+body
+  padding-top 40px
+  background #F2F2F2 url('../img/bg.png')
+  color #444
+  user-select none
+
+h1, #main
+  -webkit-animation-name fadein
+  -webkit-animation-iteration-count 1
+  -webkit-animation-timing-function linear
+  -webkit-animation-duration 400ms
+
+a
+  text-decoration none
+
+h1
+  text-align center
+  margin-bottom 70px
+
+@css
+  @-webkit-keyframes fadein {
+  from {
+    opacity 0
+  }
+  to {
+    opacity 1
+    }
+  }
+
+h1, h2, h3
+  cursor default
+
+h3
+  font-size 0.9em
+
+#twitterbtn
+  position absolute
+  top 90px
+  left 50%
+  margin-left -45px
+
+.col
+  position absolute
+  text-align center
+  padding 0 20px
+
+.col-left
+  left 0
+  right 50%
+  .controls
+    margin-top 10px
+    float right
+    label
+      cursor pointer
+      margin-right 10px
+      font-size 14px
+
+.col-right
+  left 50%
+  right 0
+
+.header
+  position relative
+  height 40px
+  h2
+    float left
+    margin-top 10px
+  .controls
+    position absolute
+    right 0
+
+#loadsample
+  float left
+  margin-left 10px
+
+textarea
+  width 98%
+  max-width 98%
+  height 400px
+  border-radius 3px
+  border-color #bbb
+  font-size 13px
+  font-family monospace,sans-serif
+  resize none
+  padding 1%
+  background-color #fafafa
+  box-shadow 0px 1px 0px rgba(255, 255, 255, 0.58), inset 0px 0px 6px rgba(0, 0, 0, 0.07)
+  &:focus
+    outline none
+    border-color #999
+
+
+input[type="radio"],
+input[type="checkbox"]
+  cursor pointer
+  margin 0
+  -webkit-appearance none
+  -webkit-margin-start 5px
+  -webkit-margin-end 5px
+  display inline-block
+  height 14px
+  position relative
+  vertical-align middle
+  width 14px
+  background #ececec
+  border 1px solid #d8d8d8
+  border-bottom 1px solid #ccc
+  box-shadow 0px 2px 2px rgba(0,0,0,0.027), inset 0px 1px 0px rgba(255,255,255,0.69), inset 0px -1px 0px rgba(0,0,0,0.0187), inset 0px 6px 7px rgba(255,255,255,0.57)
+  &:hover
+    color #888
+    text-shadow 0px 1px 0px rgba(255,255,255,0.69)
+    box-shadow 0px 2px 2px rgba(0,0,0,0.027), inset 0px 1px 0px rgba(255,255,255,0.69), inset 0px -1px 0px rgba(0,0,0,0.0187), inset 0px 6px 7px rgba(255,255,255,0.78)
+  &:active
+    color #696969
+    text-shadow 0px 1px 0px rgba(255,255,255,0.53)
+    border 1px solid #d2d2d2
+    border-bottom 1px solid #d8d8d8
+    box-shadow 0px 1px 0px rgba(255,255,255,0.58), inset 0px 1px 6px rgba(0,0,0,0.07), inset 0px -6px 7px rgba(255,255,255,0.20)
+  &:checked
+    &::before
+      -webkit-margin-start 3px
+      background rgba(102, 102, 102, 0.74)
+      content ''
+      display inline-block
+      font-size 12px
+      font-weight 400
+      height 6px
+      left 0
+      margin-top 3px
+      opacity 1
+      position absolute
+      top 0
+      vertical-align top
+      width 6px
+      -webkit-box-shadow 0px 1px 0px rgba(255,255,255,0.69), inset 0px 1px 3px rgba(0,0,0,0.35)
+
+
+input[type="checkbox"]
+  border-radius 3px
+  &:checked
+    &::before
+      border-radius 2px
+
+input[type="radio"]
+  border-radius 100%
+  &:checked
+    &::before
+      border-radius 100%
+
+button
+  font-family "Helvetica Neue", Helvetica, Arial, sans-serif
+  font-size 12px
+  margin 0
+  position relative
+  display block
+  color #666
+  text-shadow 0px 1px 0px rgba(255,255,255,0.59)
+  background #ececec
+  padding 6px 20px 7px 20px
+  outline none
+  border 1px solid #d8d8d8
+  border-bottom 1px solid #ccc
+  border-radius 3px
+  cursor pointer
+  overflow visible
+  box-shadow 0px 2px 2px rgba(0,0,0,0.027), inset 0px 1px 0px rgba(255,255,255,0.69), inset 0px -1px 0px rgba(0,0,0,0.0187), inset 0px 15px 14px rgba(255,255,255,0.57)
+  &:hover
+    color #888
+    text-shadow 0px 1px 0px rgba(255,255,255,0.69)
+    box-shadow 0px 2px 2px rgba(0,0,0,0.027), inset 0px 1px 0px rgba(255,255,255,0.69), inset 0px -1px 0px rgba(0,0,0,0.0187), inset 0px 15px 14px rgba(255,255,255,0.75)
+  &:active
+    color #696969
+    text-shadow 0px 1px 0px rgba(255,255,255,0.53)
+    border 1px solid #d2d2d2
+    border-bottom 1px solid #d8d8d8
+    border-radius 3px
+    box-shadow 0px 1px 0px rgba(255,255,255,0.58), inset 0px 1px 6px rgba(0,0,0,0.07), inset 0px -15px 14px rgba(255,255,255,0.20)
+
+
+#footer
+  cursor default
+  position absolute
+  bottom 10px
+  left 10px
+  a
+    color #2BA09E
+    &:hover
+      color #000
+
+.github-ribbon
+  background-color #121621
+  top 3.2em
+  right -3.7em
+  transform rotate(45deg)
+  box-shadow 0 0 0 1px #1d212e inset,0 0 2px 1px #fff inset,0 0 1em #888
+  color rgba(255,255,255,0.90)
+  display block
+  padding .6em 3.5em
+  position fixed
+  font bold .82em 'Lato' sans-serif
+  text-align center
+  text-decoration none
+  text-shadow 1px -1px 8px rgba(0,0,0,0.60)
+  user-select none
+
+.github-ribbon-msg
+  transform rotate(45deg)
+  top 6.4em
+  right 2.5em
+  font-size 10px
+  position fixed
+  font-family sans-serif
+  color black
+  &:hover
+    color red
