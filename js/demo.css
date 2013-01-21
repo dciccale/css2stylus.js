@@ -4,20 +4,20 @@ body {
 
 body a {
   text-decoration: none;
-  -webkit-border-radius:100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
   -webkit-box-shadow: 1px 1px black;
-  color: #666;
-  -moz-border-radius:100%;
   -moz-box-shadow: 1px 1px black;
+  color: #666;
 }
 
 body a:hover {
   text-decoration: underline;
-  -webkit-border-radius:100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
   -webkit-box-shadow: 1px 1px black;
-  color: #333;
-  -moz-border-radius:100%;
   -moz-box-shadow: 1px 1px black;
+  color: #333;
 }
 
 body a:active {
