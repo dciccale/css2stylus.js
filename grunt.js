@@ -24,7 +24,7 @@ module.exports = function (grunt) {
     mincss: {
       dist: {
         src: ['css/css.css'],
-        dest: 'css/css.css'
+        dest: 'css/css.min.css'
       }
     },
     watch: {
