@@ -1,4 +1,10 @@
-/*! css2stylus | http://css2stylus.com | https://github.com/dciccale/css2stylus.js/blob/master/LICENSE.txt */
+/*!
+ * css2stylus.js
+ * http://css2stylus.com
+ * Copyright (c) 2013 Denis Ciccale (@tdecs)
+ * Released under the MIT license
+ * https://github.com/dciccale/css2stylus.js/blob/master/LICENSE.txt
+ */
 (function (window) {
 
   // use global as window in node
