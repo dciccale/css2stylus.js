@@ -1,7 +1,8 @@
 $(function () {
+  var options = {};
   var input = $('#input');
   var output = $('#output');
-  var convert = function (options) {
+  var convert = function () {
     var css = input.val();
     if (!css) return;
     var converter = new Css2Stylus.Converter(css);
@@ -16,11 +17,13 @@ $(function () {
   });
 
   $('#main input[name="indentation"]').change(function () {
-    convert({ indent: this.value });
+    $.extend(options, {indent: this.value});
+    convert();
   });
 
   $('#unprefix').change(function () {
-    convert({ unPrefix: this.checked });
+    $.extend(options, {unPrefix: this.checked});
+    convert();
   });
 
   $.get('js/demo.css', function (css) {
