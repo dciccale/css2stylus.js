@@ -21,12 +21,6 @@ module.exports = function (grunt) {
         dest: 'js/demo.min.js'
       }
     },
-    concat: {
-      dist: {
-        src: ['src/js/*.js'],
-        dest: 'js/demo.min.js'
-      }
-    },
     mincss: {
       dist: {
         src: ['css/css.css'],
@@ -42,13 +36,9 @@ module.exports = function (grunt) {
         files: ['src/jade/index.jade'],
         tasks: 'jade'
       },
-      /*min: {
+      min: {
         files: ['<config:min.dist.src>'],
         tasks: 'min'
-      }*/
-      concat: {
-        files: ['<config:min.dist.src>'],
-        tasks: 'concat'
       }
     }
   });
@@ -57,7 +47,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-mincss');
 
-  //grunt.registerTask('default', 'stylus jade min mincss');
-  grunt.registerTask('default', 'stylus jade concat mincss');
+  grunt.registerTask('default', 'stylus jade min mincss');
 
 };
