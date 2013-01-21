@@ -123,14 +123,18 @@
 
     unPrefix: function (declaration) {
       var propValues = {};
-      return declaration.replace(/-\w*-(.*)/g, function (wholeMatch, propValue) {
+
+      declaration = declaration.replace(/-\w*-(.*)/g, function (wholeMatch, propValue) {
         if (propValues[propValue]) {
           return '';
         } else {
           propValues[propValue] = 1;
           return propValue;
         }
-      });
+      })
+        .replace(/^(.*)[\s\n]+\1/gm, '$1');
+
+      return declaration;
     },
 
     addRule: function (path, selector) {
