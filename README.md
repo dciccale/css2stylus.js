@@ -43,9 +43,15 @@ The output will be saved to `myfile.styl`.
   </script>
 ```
 
-## Keeping CSS syntax
+## Keep CSS syntax
 To keep CSS punctuation `{:;}` just pass `--cssSyntax` option from command line.
+
 Or pass options object when processing a CSS file from JavaScript `converter.processCss({ cssSyntax: true });`
+
+## nib support
+Unprefix any CSS snippet with vendor prefixes by passing `--unPrefix` option from command line.
+
+Or pass an options object when processing a CSS file from JavaScript `converter.processCss({ unPrefix: true });`
 
 ## License
 See [LICENSE.txt](https://raw.github.com/dciccale/css2stylus.js/master/LICENSE.txt)
