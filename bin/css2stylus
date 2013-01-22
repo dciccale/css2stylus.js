@@ -5,24 +5,29 @@ var fs = require('fs'),
   Css2Stylus = require('../lib/css2stylus'),
   converter,
   options = {},
-  keepCssSyntax,
   readFile = function (file, callback) {
     return fs.readFile(file, 'utf-8', function (err, data) {
       if (err) { throw err; }
       callback(data);
     });
+  },
+  checkOption = function (option) {
+    var opt = '--' + option,
+      optionIndex= args.indexOf(opt),
+      hasOption = optionIndex >= 0;
+    if (hasOption) {
+      options[option] = true;
+      args.splice(optionIndex, 1);
+    }
   };
 
 if (!args.length) {
-  console.log('Usage: css2stylus <file1.css file2.css>');
+  console.log('Usage: css2stylus [options] <file1.css file2.css>');
   process.exit(1);
 }
 
-keepCssSyntax = args.indexOf('--cssSyntax');
-if (keepCssSyntax >= 0) {
-  options.cssSyntax = true;
-  args.splice(keepCssSyntax, 1);
-}
+checkOption('cssSyntax');
+checkOption('unPrefix');
 
 args.forEach(function (file) {
   if (path.extname(file) === '.css') {
