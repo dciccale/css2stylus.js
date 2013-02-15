@@ -10,15 +10,25 @@ h1 Css2Stylus
     .header
       h2 Paste your CSS
       button#loadsample Load sample
-      .controls
-        label tab
-          input(type="radio", name="indentation", value="tab")
-        label 2 spaces
-          input(type="radio", name="indentation", value="2", checked="checked")
-        label 4 spaces
-          input(type="radio", name="indentation", value="4")
-        label unPrefix
-          input(type="checkbox", name="unprefix", id="unprefix")
+      #options
+        button#optionsbtn options
+        ul#optionsmenu
+          li
+            label(title="Specifies indentation format")
+              span Indentation
+              select(name="indent", data-option)
+                option(selected, value=2) 2 spaces
+                option(value=4) 4 spaces
+                option(value="tab") tab
+          li
+            label(title="Remove vendor prefixes")
+              span unPrefix
+              input(type="checkbox", name="unPrefix", id="unPrefix", data-option)
+          li
+            label(title="Keep css punctuation")
+              span cssSyntax
+              input(type="checkbox", name="cssSyntax", id="cssSyntax", data-option)
+
     textarea#input
 
   .col.col-right
@@ -29,8 +39,7 @@ h1 Css2Stylus
     textarea#output
 
 #footer
-  p About the author:
-    a(href="http://twitter.com/tdecs") @tdecs
+  p About the author: <a href="http://twitter.com/tdecs">@tdecs</a>
 
 
 script(src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js")

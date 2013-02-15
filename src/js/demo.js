@@ -16,15 +16,14 @@ $(function () {
     output.select();
   });
 
-  $('#main input[name="indentation"]').change(function () {
-    $.extend(options, {indent: this.value});
+  $('#optionsmenu').find('[data-option]').change(function () {
+    var opts = {};
+    var val = /x/.test(this.type) ? this.checked : this.value;
+    opts[this.name] = val;
+    $.extend(options, opts);
     convert();
   });
 
-  $('#unprefix').change(function () {
-    $.extend(options, {unPrefix: this.checked});
-    convert();
-  });
 
   $.get('js/demo.css', function (css) {
     $('#loadsample').click(function () {

@@ -4,6 +4,25 @@
 
 selection(rgba(0,0,0,0.7), #ccc)
 
+hover-styles()
+  color #888
+  text-shadow 0px 1px 0px rgba(255,255,255,0.69)
+  box-shadow 0px 2px 2px rgba(0,0,0,0.027), inset 0px 1px 0px rgba(255,255,255,0.69), inset 0px -1px 0px rgba(0,0,0,0.0187), inset 0px 15px 14px rgba(255,255,255,0.75)
+
+form-styles()
+  font-family "Helvetica Neue", Helvetica, Arial, sans-serif
+  color #666
+  text-shadow 0px 1px 0px rgba(255,255,255,0.59)
+  background-color #ececec
+  padding 6px 20px 7px 20px
+  outline none
+  border 1px solid #d8d8d8
+  border-bottom 1px solid #ccc
+  border-radius 3px
+  cursor pointer
+  box-shadow 0px 2px 2px rgba(0,0,0,0.027), inset 0px 1px 0px rgba(255,255,255,0.69), inset 0px -1px 0px rgba(0,0,0,0.0187), inset 0px 15px 14px rgba(255,255,255,0.57)
+  overflow visible
+
 body
   padding-top 40px
   background #F2F2F2 url('../img/bg.png')
@@ -47,7 +66,6 @@ h3
 
 .col
   position absolute
-  text-align center
   padding 0 20px
 
 .col-left
@@ -79,6 +97,47 @@ h3
   float left
   margin-left 10px
 
+#options
+  float right
+  text-align right
+  position relative
+  &:hover
+    #optionsbtn
+      border-bottom-color #fff
+      hover-styles()
+    #optionsmenu
+      display block
+
+#optionsbtn
+  display inline-block
+
+#optionsmenu
+  display none
+  position absolute
+  right -2px
+  list-style-type none
+  text-align left
+  font-size 0.9em
+  width 200px
+  border 1px solid #ccc
+  background-color #fafafa
+  padding 5px 15px
+  border-radius 4px
+  border-top-right-radius 0
+  box-shadow 0px 6px 20px -5px rgba(0,0,0,0.2)
+  li
+    margin 10px 0
+  label
+    cursor pointer
+    color #666
+    &:hover
+      color #888
+    span
+      display inline-block
+      width 70px
+  select, input
+    margin 0 5px
+
 textarea
   width 98%
   max-width 98%
@@ -101,8 +160,6 @@ input[type="checkbox"]
   cursor pointer
   margin 0
   -webkit-appearance none
-  -webkit-margin-start 5px
-  -webkit-margin-end 5px
   display inline-block
   height 14px
   position relative
@@ -113,9 +170,7 @@ input[type="checkbox"]
   border-bottom 1px solid #ccc
   box-shadow 0px 2px 2px rgba(0,0,0,0.027), inset 0px 1px 0px rgba(255,255,255,0.69), inset 0px -1px 0px rgba(0,0,0,0.0187), inset 0px 6px 7px rgba(255,255,255,0.57)
   &:hover
-    color #888
-    text-shadow 0px 1px 0px rgba(255,255,255,0.69)
-    box-shadow 0px 2px 2px rgba(0,0,0,0.027), inset 0px 1px 0px rgba(255,255,255,0.69), inset 0px -1px 0px rgba(0,0,0,0.0187), inset 0px 6px 7px rgba(255,255,255,0.78)
+    hover-styles()
   &:active
     color #696969
     text-shadow 0px 1px 0px rgba(255,255,255,0.53)
@@ -154,26 +209,13 @@ input[type="radio"]
       border-radius 100%
 
 button
-  font-family "Helvetica Neue", Helvetica, Arial, sans-serif
+  form-styles()
   font-size 12px
   margin 0
   position relative
   display block
-  color #666
-  text-shadow 0px 1px 0px rgba(255,255,255,0.59)
-  background #ececec
-  padding 6px 20px 7px 20px
-  outline none
-  border 1px solid #d8d8d8
-  border-bottom 1px solid #ccc
-  border-radius 3px
-  cursor pointer
-  overflow visible
-  box-shadow 0px 2px 2px rgba(0,0,0,0.027), inset 0px 1px 0px rgba(255,255,255,0.69), inset 0px -1px 0px rgba(0,0,0,0.0187), inset 0px 15px 14px rgba(255,255,255,0.57)
   &:hover
-    color #888
-    text-shadow 0px 1px 0px rgba(255,255,255,0.69)
-    box-shadow 0px 2px 2px rgba(0,0,0,0.027), inset 0px 1px 0px rgba(255,255,255,0.69), inset 0px -1px 0px rgba(0,0,0,0.0187), inset 0px 15px 14px rgba(255,255,255,0.75)
+    hover-styles()
   &:active
     color #696969
     text-shadow 0px 1px 0px rgba(255,255,255,0.53)
@@ -182,6 +224,14 @@ button
     border-radius 3px
     box-shadow 0px 1px 0px rgba(255,255,255,0.58), inset 0px 1px 6px rgba(0,0,0,0.07), inset 0px -15px 14px rgba(255,255,255,0.20)
 
+select
+  form-styles()
+  -webkit-appearance none
+  padding 2px 24px 3px 10px
+  background-image unquote("url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAAQCAYAAACV3GYgAAAAWklEQVRIx+3VOwoAIAwD0B49N686CCJ+K0aHFrIl8LaKqsqvEccxcPEQo8bgNs4KTBth4HaByCMWbhWIcsDEzYCoy2xcD4hW8QWuBqJXeoXLQIwK/iEc57iDBIg+ClNpjek/AAAAAElFTkSuQmCC)")
+  background-repeat no-repeat
+  background-position 100% 6px
+  background-size 27px
 
 #footer
   cursor default
