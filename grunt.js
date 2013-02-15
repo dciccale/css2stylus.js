@@ -17,7 +17,7 @@ module.exports = function (grunt) {
     },
     min: {
       dist: {
-        src: ['src/js/*.js'],
+        src: ['src/js/css2stylus.js', 'src/js/kimbo.min.js', 'src/js/demo.js'],
         dest: 'js/demo.min.js'
       }
     },
