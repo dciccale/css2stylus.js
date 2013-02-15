@@ -51,6 +51,11 @@
         this.options.closingBracket = '}';
         this.options.semicolon = ':';
         this.options.eol = ';';
+      } else if (options.cssSyntax === false) {
+        this.options.openingBracket = '';
+        this.options.closingBracket = '';
+        this.options.semicolon = '';
+        this.options.eol = '';
       }
 
       // indentation
