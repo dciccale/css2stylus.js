@@ -13,7 +13,7 @@ $(function () {
   $('#input').keyup(convert);
 
   $('#selectall').click(function () {
-    output.select();
+    output[0].select();
   });
 
   $('#optionsmenu').find('[data-option]').change(function () {
