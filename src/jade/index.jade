@@ -47,6 +47,6 @@ script
   var _gaq=_gaq||[];_gaq.push(["_setAccount","UA-24098807-9"]);_gaq.push(["_trackPageview"]);(function(){var a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"==document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})();
 
 #twitterbtn
-  a(href="https://twitter.com/share", class="twitter-share-button", data-text="Convert your #CSS into #Stylus!", data-url="http://css2stylus.com", data-related="tdecs", data-lang="en", data-size="large", data-count="true") Tweet
+  a(href="https://twitter.com/share", class="twitter-share-button", data-text="Convert your #CSS into #Stylus!", data-size="large", data-related="tdecs") Tweet
   script
-    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
