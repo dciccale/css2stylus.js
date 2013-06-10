@@ -1,28 +1,36 @@
 #!/usr/bin/env node
-var fs = require('fs'),
-  path = require('path'),
-  args = process.argv.slice(2),
-  Css2Stylus = require('../lib/css2stylus'),
-  converter,
-  options = {},
-  readFile = function (file, callback) {
-    return fs.readFile(file, 'utf-8', function (err, data) {
-      if (err) { throw err; }
-      callback(data);
-    });
-  },
-  checkOption = function (option) {
-    var opt = '--' + option,
-      optionIndex= args.indexOf(opt),
-      hasOption = optionIndex >= 0;
-    if (hasOption) {
-      options[option] = true;
-      args.splice(optionIndex, 1);
+var fs = require('fs');
+var path = require('path');
+var args = process.argv.slice(2);
+var Css2Stylus = require('../lib/css2stylus');
+var options = {};
+var log = {
+  l: function (msg) { console.log(msg + '\n\033[0m'); },
+  ok: function (msg) { this.l('\033[32m' + msg); },
+  error: function (msg) { this.l('\033[31m' + msg); }
+};
+
+function readFile(file, callback) {
+  return fs.readFile(file, 'utf-8', function (err, data) {
+    if (err) {
+      log.error('Error reading file: ' + file);
+      throw err;
     }
-  };
+    callback(data);
+  });
+}
+
+function checkOption(option) {
+  var opt = '--' + option;
+  var optionIndex= args.indexOf(opt);
+  if (optionIndex >= 0) {
+    options[option] = true;
+    args.splice(optionIndex, 1);
+  }
+}
 
 if (!args.length) {
-  console.log('Usage: css2stylus [options] <file1.css file2.css>');
+  log.l('\nUsage: css2stylus [options] <file1.css file2.css>');
   process.exit(1);
 }
 
@@ -31,11 +39,18 @@ checkOption('unPrefix');
 
 args.forEach(function (file) {
   if (path.extname(file) === '.css') {
-    var css = readFile(file, function (css) {
-      var stylusfile = path.basename(file, path.extname(file)) + '.styl',
-        converter = new Css2Stylus.Converter(css);
+    readFile(file, function (css) {
+      var stylusFile = path.basename(file, path.extname(file)) + '.styl';
+      var converter = new Css2Stylus.Converter(css);
+      log.l('Processing ' + file + ' ...');
       converter.processCss(options);
-      fs.writeFile(stylusfile, converter.getStylus());
+      fs.writeFile(stylusFile, converter.getStylus(), function (err) {
+        if (err) {
+          log.error('Error saving to: ' + stylusFile);
+          throw err;
+        }
+        log.ok('Output saved to: ' + stylusFile);
+      });
     });
   }
 });
