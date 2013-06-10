@@ -1,4 +1,4 @@
-# [css2stylus.js](http://css2stylus.com) [![NPM version](https://badge.fury.io/js/css2stylus.png)](http://badge.fury.io/js/jshint)
+# [css2stylus.js](http://css2stylus.com) [![NPM version](https://badge.fury.io/js/css2stylus.png)](http://badge.fury.io/js/css2stylus)
 
 JavaScript utility to convert CSS into Stylus.
 
