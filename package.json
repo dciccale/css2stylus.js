@@ -21,13 +21,16 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "grunt": "0.3.x",
-    "grunt-contrib-stylus": "0.3.x",
-    "grunt-contrib-jade": "0.3.x",
-    "grunt-contrib-mincss": "0.3.x"
+    "grunt": "0.4.x",
+    "grunt-contrib-uglify": "0.2.x",
+    "grunt-contrib-stylus": "0.5.x",
+    "grunt-contrib-jade": "0.7.x",
+    "grunt-contrib-cssmin": "0.6.x",
+    "grunt-contrib-htmlmin": "0.1.x"
   },
   "keywords": ["css2stylus", "css", "stylus", "converter"],
   "engines": [
-    "node >= 0.6.0"
-  ]
+    "node >= 0.8.0"
+  ],
+  "private": true
 }
