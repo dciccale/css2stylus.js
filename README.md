@@ -17,12 +17,42 @@ Install the module
 $ npm install -g css2stylus
 ```
 
+```bash
+$ css2stylus
+
+Usage: css2stylus [options] <file1.css> <file2.css>
+
+Supports bash-style piping from stdin to stdout, e.g. `cat myFile.css | css2stylus` outputs myFile.css as stylus. Useful for integrating into an editor of choice.
+
+Examples:
+  css2stylus -u -i 4 file1.css         Use 4 space ndent and convert file1.css while unprefixing.
+  css2stylus -c file1.css file2.css    Preserve CSS syntax while converting multiple files.
+
+
+Options:
+  -u, --unPrefix   Un-prefix any property with vendor prefixes.
+  -c, --cssSyntax  Keep CSS syntax punctuation.
+  -f, --force      Overwrite existing .styl files
+  -i, --indent     Set indentation level
+```
+
 Convert any css file:
+
 ```bash
 $ css2stylus myfile.css
 ```
 
 The output will be saved to `myfile.styl`.
+
+The binary is also capable of piping from stdin, stdout.
+This is useful for integrating the binary with Vim or another editor of your choice.
+
+Vim mapping to convert the selected CSS text to stylus:
+```
+" CSS2Stylus
+:vnoremap <leader>cs :!css2stylus -u -i 4<cr><esc>
+```
+
 
 ### Browser
 
