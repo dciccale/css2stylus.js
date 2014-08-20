@@ -12,19 +12,26 @@
     "url": "http://github.com/dciccale/css2stylus.js/issues"
   },
   "licenses": [
-   {
-     "type": "MIT",
-     "url": "http://github.com/dciccale/css2stylus.js/blob/master/LICENSE.txt"
-   }
+    {
+      "type": "MIT",
+      "url": "http://github.com/dciccale/css2stylus.js/blob/master/LICENSE.txt"
+    }
   ],
   "main": "./lib/css2stylus",
   "bin": {
     "css2stylus": "./bin/css2stylus"
   },
   "preferGlobal": "true",
-  "dependencies": {},
+  "dependencies": {
+    "yargs": "^1.2.2"
+  },
   "devDependencies": {},
-  "keywords": ["css2stylus", "css", "stylus", "converter"],
+  "keywords": [
+    "css2stylus",
+    "css",
+    "stylus",
+    "converter"
+  ],
   "engines": [
     "node >= 0.6.0"
   ]
