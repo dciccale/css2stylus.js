@@ -25,15 +25,17 @@ Usage: css2stylus [options] <file1.css> <file2.css>
 Supports bash-style piping from stdin to stdout, e.g. `cat myFile.css | css2stylus` outputs myFile.css as stylus. Useful for integrating into an editor of choice.
 
 Examples:
-  css2stylus -u -i 4 file1.css         Use 4 space ndent and convert file1.css while unprefixing.
-  css2stylus -c file1.css file2.css    Preserve CSS syntax while converting multiple files.
+  css2stylus -u -i 4 file1.css         Use 4 space ndent and convert file1.css while unprefixing
+  css2stylus -c file1.css file2.css    Preserve CSS syntax while converting multiple files
+  css2stylus file1.css -o styl         Save processed files files into the `styl` directoy
 
 
 Options:
-  -u, --unPrefix   Un-prefix any property with vendor prefixes.
-  -c, --cssSyntax  Keep CSS syntax punctuation.
+  -u, --unPrefix   Un-prefix any property with vendor prefixes
+  -c, --cssSyntax  Keep CSS syntax punctuation
   -f, --force      Overwrite existing .styl files
   -i, --indent     Set indentation level
+  -o, --out        Specify an output directory
 ```
 
 Convert any css file:
