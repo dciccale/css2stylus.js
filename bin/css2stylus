@@ -129,6 +129,7 @@ args._.forEach(function(file) {
       });
     });
   }
+  else throw new Error('Input file must be css!');
 });
 
 // bit hacky, but only way to tell if stdin hasn't been passed and no arguments were passed either
