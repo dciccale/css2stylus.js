@@ -34,7 +34,7 @@
   },
   "preferGlobal": "true",
   "dependencies": {
-    "yargs": "^1.2.2"
+    "yargs": "3.*.*"
   },
   "devDependencies": {},
   "keywords": [
