@@ -31,11 +31,12 @@ Examples:
 
 
 Options:
-  -u, --unPrefix   Un-prefix any property with vendor prefixes
-  -c, --cssSyntax  Keep CSS syntax punctuation
-  -f, --force      Overwrite existing .styl files
-  -i, --indent     Set indentation level
-  -o, --out        Specify an output directory
+  -u, --unPrefix     Un-prefix any property with vendor prefixes
+  -c, --cssSyntax    Keep CSS syntax punctuation
+  -f, --force        Overwrite existing .styl files
+  -i, --indent       Set indentation level
+  -o, --out          Specify an output directory
+  -:, --keep-colons  Keep colons: in rules
 ```
 
 Convert any css file:
