@@ -107,7 +107,7 @@ args._.forEach(function(file) {
 
       if (!args.f && fs.existsSync(stylusFile)) {
         log.error(stylusFile + ' already exists. Use -f to override.');
-        return;
+        process.exit(1);
       }
 
       converter = new Css2Stylus.Converter(fileContents);
