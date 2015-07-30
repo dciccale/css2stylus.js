@@ -9,7 +9,6 @@ exports['Should convert CSS into Stylus'] = function (test) {
   var converter = new Css2Stylus.Converter(css);
   converter.processCss();
   var stylusOutput = converter.getStylus();
-  console.log(stylusOutput);
   test.equal(stylusOutput, 'body\n  color red\n\n');
   test.done();
 };
