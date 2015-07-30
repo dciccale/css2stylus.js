@@ -49,32 +49,31 @@ var yarg = require('yargs')
   .example('$0 -u -i 4 file1.css', 'Use 4 space ndent and convert file1.css while unprefixing.')
   .example('$0 -c file1.css file2.css', 'Preserve CSS syntax while converting multiple files.')
   .example('$0 file1.css -o styl', 'Save processed files files into the `styl` directoy')
-  .describe('u', 'Un-prefix any property with vendor prefixes.')
-  .alias('u', 'unPrefix')
-  .describe('c', 'Keep CSS syntax punctuation.')
-  .alias('c', 'cssSyntax')
-  .describe('f', 'Overwrite existing .styl files')
-  .alias('f', 'force')
-  .describe('i', 'Set indentation level')
-  .alias('i', 'indent')
-  .describe('o', 'Specify an output directory')
-  .alias('o', 'out');
+  .describe('unPrefix', 'Un-prefix any property with vendor prefixes.')
+    .alias('unPrefix', 'u')
+    .boolean('unPrefix')
+  .describe('cssSyntax', 'Keep CSS syntax punctuation.')
+    .alias('cssSyntax', 'c')
+    .boolean('cssSyntax')
+  .describe('force', 'Overwrite existing .styl files')
+    .alias('force', 'f')
+    .boolean('force')
+  .describe('indent', 'Set indentation level: «tab» or number (of spaces)')
+    .alias('indent', 'i')
+    .default('indent', 2)
+    .string('indent')
+  .describe('out', 'Specify an output directory')
+    .alias('out', 'o')
+    .string('out')
+  .describe('keepColons', 'Keep colons: in rules')
+    .alias('keepColons', ':')
+    .boolean('keepColons');
 
 var args = yarg.argv;
 
-var options = {};
+var options = args;
 var sdtdinData = '';
 var beganProcessingFiles = false;
-
-if (args.c) {
-  options.cssSyntax = true;
-}
-if (args.u) {
-  options.unPrefix = true;
-}
-if (args.i) {
-  options.indent = args.i;
-}
 
 process.stdin.setEncoding('utf8');
 process.stdin.on('data', function (data) {
