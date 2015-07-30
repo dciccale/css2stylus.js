@@ -127,8 +127,8 @@ function readFile(file, callback) {
   });
 };
 
-function writeFile(file, callback) {
-  return fs.readFile(file, 'utf-8', function (err, data) {
+function writeFile(file, contents, callback) {
+  return fs.writeFile(file, contents, function (err, data) {
     if (err) {
       log.error('Error saving to: ' + file);
       throw err;
