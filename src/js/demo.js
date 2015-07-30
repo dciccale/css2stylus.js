@@ -2,13 +2,6 @@ $(function () {
   var options = {};
   var input = $('#input');
   var output = $('#output');
-  var convert = function () {
-    var css = input.val();
-    if (!css) return;
-    var converter = new Css2Stylus.Converter(css);
-    converter.processCss(options);
-    output.val(converter.getStylus());
-  }
 
   $('#input').keyup(convert);
 
@@ -16,7 +9,7 @@ $(function () {
     output[0].select();
   });
 
-  $('#optionsmenu').find('[data-option]').change(function () {
+  $('#optionsmenu').find('[data-option]').on('change', function () {
     var opts = {};
     var val = /x/.test(this.type) ? this.checked : this.value;
     opts[this.name] = val;
@@ -25,12 +18,20 @@ $(function () {
   });
 
 
-  $.get('js/demo.css', function (css) {
-    $('#loadsample').click(function () {
+  $.get('demo.css', function (css) {
+    $('#loadsample').on('click', function () {
       input.val(css);
       convert();
     });
   });
+
+  function convert() {
+    var css = input.val();
+    if (!css) return;
+    var converter = new Css2Stylus.Converter(css);
+    converter.processCss(options);
+    output.val(converter.getStylus());
+  }
 });
 
 // use css3 github ribbon or fallback

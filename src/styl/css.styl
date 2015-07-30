@@ -9,20 +9,6 @@ hover-styles()
   text-shadow 0px 1px 0px rgba(255,255,255,0.69)
   box-shadow 0px 2px 2px rgba(0,0,0,0.027), inset 0px 1px 0px rgba(255,255,255,0.69), inset 0px -1px 0px rgba(0,0,0,0.0187), inset 0px 15px 14px rgba(255,255,255,0.75)
 
-form-styles()
-  font-family "Helvetica Neue", Helvetica, Arial, sans-serif
-  color #666
-  text-shadow 0px 1px 0px rgba(255,255,255,0.59)
-  background-color #ececec
-  padding 6px 20px 7px 20px
-  outline none
-  border 1px solid #d8d8d8
-  border-bottom 1px solid #ccc
-  border-radius 3px
-  cursor pointer
-  box-shadow 0px 2px 2px rgba(0,0,0,0.027), inset 0px 1px 0px rgba(255,255,255,0.69), inset 0px -1px 0px rgba(0,0,0,0.0187), inset 0px 15px 14px rgba(255,255,255,0.57)
-  overflow visible
-
 body
   padding-top 40px
   background #F2F2F2 url('../img/bg.png')
@@ -154,7 +140,6 @@ textarea
     outline none
     border-color #999
 
-
 input[type="radio"],
 input[type="checkbox"]
   cursor pointer
@@ -208,8 +193,21 @@ input[type="radio"]
     &::before
       border-radius 100%
 
+button, select
+  font-family "Helvetica Neue", Helvetica, Arial, sans-serif
+  color #666
+  text-shadow 0px 1px 0px rgba(255,255,255,0.59)
+  background-color #ececec
+  padding 6px 20px 7px 20px
+  outline none
+  border 1px solid #d8d8d8
+  border-bottom 1px solid #ccc
+  border-radius 3px
+  cursor pointer
+  box-shadow 0px 2px 2px rgba(0,0,0,0.027), inset 0px 1px 0px rgba(255,255,255,0.69), inset 0px -1px 0px rgba(0,0,0,0.0187), inset 0px 15px 14px rgba(255,255,255,0.57)
+  overflow visible
+
 button
-  form-styles()
   font-size 12px
   margin 0
   position relative
@@ -225,7 +223,6 @@ button
     box-shadow 0px 1px 0px rgba(255,255,255,0.58), inset 0px 1px 6px rgba(0,0,0,0.07), inset 0px -15px 14px rgba(255,255,255,0.20)
 
 select
-  form-styles()
   -webkit-appearance none
   padding 2px 24px 3px 10px
   background-image unquote("url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAAQCAYAAACV3GYgAAAAWklEQVRIx+3VOwoAIAwD0B49N686CCJ+K0aHFrIl8LaKqsqvEccxcPEQo8bgNs4KTBth4HaByCMWbhWIcsDEzYCoy2xcD4hW8QWuBqJXeoXLQIwK/iEc57iDBIg+ClNpjek/AAAAAElFTkSuQmCC)")
