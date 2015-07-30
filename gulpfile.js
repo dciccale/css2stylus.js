@@ -50,3 +50,5 @@ gulp.task('serve', function () {
   gulp.watch(['./src/index.html'], ['index']);
   gulp.watch(['./js/*.js', './css/*.css', 'index.html']).on('change', browserSync.reload);
 });
+
+gulp.task('default', ['scripts', 'styles', 'index']);
