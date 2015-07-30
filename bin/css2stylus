@@ -36,6 +36,7 @@ var args = yargs
   .describe('indent', 'Set indentation level: «tab» or number (of spaces)')
     .alias('indent', 'i')
     .string('indent')
+    .default('indent', '2')
   .describe('out', 'Specify an output directory')
     .alias('out', 'o')
     .string('out')
