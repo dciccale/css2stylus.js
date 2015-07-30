@@ -3,6 +3,9 @@
 var fs = require('fs');
 var path = require('path');
 
+var yargs = require('yargs')
+
+var pkg = require('../package.json');
 var Css2Stylus = require('../lib/css2stylus');
 
 var log = {
@@ -11,7 +14,90 @@ var log = {
   error: function (msg) { this.l('\033[31m' + msg); }
 };
 
-var mkdir = function (dirpath, mode) {
+var args = yargs
+  .version(pkg.version)
+  .alias('version', 'v')
+  .usage(
+    '\nUsage: css2stylus [options] <file1.css> <file2.css>\n\n' +
+    'Supports bash-style piping from stdin to stdout, e.g. `cat myFile.css | css2stylus` ' +
+    'outputs myFile.css as stylus. Useful for integrating into an editor of choice.')
+  .example('$0 -u -i 4 file1.css', 'Use 4 space ndent and convert file1.css while unprefixing.')
+  .example('$0 -c file1.css file2.css', 'Preserve CSS syntax while converting multiple files.')
+  .example('$0 file1.css -o styl', 'Save processed files files into the `styl` directoy')
+  .describe('unPrefix', 'Un-prefix any property with vendor prefixes.')
+    .alias('unPrefix', 'u')
+    .boolean('unPrefix')
+  .describe('cssSyntax', 'Keep CSS syntax punctuation.')
+    .alias('cssSyntax', 'c')
+    .boolean('cssSyntax')
+  .describe('force', 'Overwrite existing .styl files')
+    .alias('force', 'f')
+    .boolean('force')
+  .describe('indent', 'Set indentation level: «tab» or number (of spaces)')
+    .alias('indent', 'i')
+    .string('indent')
+  .describe('out', 'Specify an output directory')
+    .alias('out', 'o')
+    .string('out')
+  .describe('keepColons', 'Keep colons: in rules')
+    .alias('keepColons', ':')
+    .boolean('keepColons')
+  .argv;
+
+var options = args;
+var sdtdinData = '';
+var beganProcessingFiles = false;
+
+process.stdin.setEncoding('utf8');
+process.stdin.on('data', function (data) {
+  sdtdinData += data;
+});
+
+process.stdin.on('end', function () {
+  var converter = new Css2Stylus.Converter(sdtdinData);
+  var output = converter.processCss(options).getStylus();
+  process.stdout.write(output);
+});
+
+process.stdin.resume();
+
+args._.forEach(function (file) {
+  var stylusFile, converter, stylusOutput;
+
+  beganProcessingFiles = true;
+
+  if (path.extname(file) === '.css') {
+
+    readFile(file, function (fileContents) {
+      stylusFile = path.basename(file, path.extname(file)) + '.styl';
+
+      if (args.o) {
+        stylusFile = path.join(args.o, stylusFile);
+        mkdir(args.o);
+      }
+
+      if (!args.f && fs.existsSync(stylusFile)) {
+        log.error(stylusFile + ' already exists. Use -f to override.');
+        process.exit(1);
+      }
+
+      converter = new Css2Stylus.Converter(fileContents);
+      log.l('Processing ' + file + ' ...');
+      converter.processCss(options);
+      stylusOutput = converter.getStylus();
+
+      writeFile(stylusFile, stylusOutput, function () {
+        if (file == args._[args._.length - 1]) {
+          process.exit(1);
+        }
+      });
+    });
+  } else {
+    throw new Error('Input file must be css!');
+  }
+});
+
+function mkdir(dirpath, mode) {
   // Set directory mode in a strict-mode-friendly way.
   if (mode == null) {
     mode = parseInt('0777', 8) & (~process.umask());
@@ -31,7 +117,7 @@ var mkdir = function (dirpath, mode) {
   }, '');
 };
 
-var readFile = function (file, callback) {
+function readFile(file, callback) {
   return fs.readFile(file, 'utf-8', function (err, data) {
     if (err) {
       log.error('Error reading file: ' + file);
@@ -41,101 +127,23 @@ var readFile = function (file, callback) {
   });
 };
 
-var yarg = require('yargs')
-  .usage(
-    '\nUsage: css2stylus [options] <file1.css> <file2.css>\n\n' +
-    'Supports bash-style piping from stdin to stdout, e.g. `cat myFile.css | css2stylus` ' +
-    'outputs myFile.css as stylus. Useful for integrating into an editor of choice.')
-  .example('$0 -u -i 4 file1.css', 'Use 4 space ndent and convert file1.css while unprefixing.')
-  .example('$0 -c file1.css file2.css', 'Preserve CSS syntax while converting multiple files.')
-  .example('$0 file1.css -o styl', 'Save processed files files into the `styl` directoy')
-  .describe('unPrefix', 'Un-prefix any property with vendor prefixes.')
-    .alias('unPrefix', 'u')
-    .boolean('unPrefix')
-  .describe('cssSyntax', 'Keep CSS syntax punctuation.')
-    .alias('cssSyntax', 'c')
-    .boolean('cssSyntax')
-  .describe('force', 'Overwrite existing .styl files')
-    .alias('force', 'f')
-    .boolean('force')
-  .describe('indent', 'Set indentation level: «tab» or number (of spaces)')
-    .alias('indent', 'i')
-    .default('indent', 2)
-    .string('indent')
-  .describe('out', 'Specify an output directory')
-    .alias('out', 'o')
-    .string('out')
-  .describe('keepColons', 'Keep colons: in rules')
-    .alias('keepColons', ':')
-    .boolean('keepColons');
+function writeFile(file, callback) {
+  return fs.readFile(file, 'utf-8', function (err, data) {
+    if (err) {
+      log.error('Error saving to: ' + file);
+      throw err;
+    }
 
-var args = yarg.argv;
-
-var options = args;
-var sdtdinData = '';
-var beganProcessingFiles = false;
-
-process.stdin.setEncoding('utf8');
-process.stdin.on('data', function (data) {
-  sdtdinData += data;
-});
-
-process.stdin.on('end', function () {
-  var converter = new Css2Stylus.Converter(sdtdinData);
-  var output = converter.processCss(options).getStylus();
-  process.stdout.write(output);
-});
-
-process.stdin.resume();
-
-args._.forEach(function(file) {
-  var stylusFile, converter;
-
-  beganProcessingFiles = true;
-
-  if (path.extname(file) === '.css') {
-
-    readFile(file, function (fileContents) {
-
-      stylusFile = path.basename(file, path.extname(file)) + '.styl';
-
-      if (args.o) {
-        stylusFile = path.join(args.o, stylusFile);
-        mkdir(args.o);
-      }
-
-      if (!args.f && fs.existsSync(stylusFile)) {
-        log.error(stylusFile + ' already exists. Use -f to override.');
-        process.exit(1);
-      }
-
-      converter = new Css2Stylus.Converter(fileContents);
-
-      log.l('Processing ' + file + ' ...');
-      converter.processCss(options);
-
-      fs.writeFile(stylusFile, converter.getStylus(), function (err) {
-        if (err) {
-          log.error('Error saving to: ' + stylusFile);
-          throw err;
-        }
-
-        log.ok('Output saved to: ' + stylusFile);
-
-        if (file == args._[args._.length - 1]) {
-          process.exit(1);
-        }
-      });
-    });
-  }
-  else throw new Error('Input file must be css!');
-});
+    log.ok('Output saved to: ' + file);
+    callback();
+  });
+};
 
 // bit hacky, but only way to tell if stdin hasn't been passed and no arguments were passed either
 // without this, script would just hang waiting for an EOF
 setTimeout(function () {
   if (sdtdinData.length == 0 && !beganProcessingFiles) {
-    yarg.showHelp();
+    yargs.showHelp();
     process.exit(1);
   }
 }, 10);
