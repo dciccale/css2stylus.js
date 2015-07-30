@@ -50,12 +50,23 @@ The output will be saved to `myfile.styl`.
 The binary is also capable of piping from stdin, stdout.
 This is useful for integrating the binary with Vim or another editor of your choice.
 
-Vim mapping to convert the selected CSS text to stylus:
-```
-" CSS2Stylus
-:vnoremap <leader>cs :!css2stylus -u -i 4<cr><esc>
+### Bash pipe
+
+Supports bash-style piping from stdin to stdout.
+Useful for integrating into an editor of choice.
+
+``sh
+$ cat myFile.css | css2stylus
 ```
 
+### Vim mapping
+
+To convert the selected CSS to stylus inside vim use the following mapping:
+
+```
+" CSS2Stylus
+:vnoremap <leader>cs :!css2stylus -u<cr><esc>
+```
 
 ### Browser
 
