@@ -89,7 +89,7 @@ args._.forEach(function (file) {
 
       writeFile(stylusFile, stylusOutput, function () {
         if (file == args._[args._.length - 1]) {
-          process.exit(1);
+          process.exit(0);
         }
       });
     });
