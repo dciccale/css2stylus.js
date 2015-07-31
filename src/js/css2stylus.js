@@ -12,6 +12,22 @@
     window = global;
   }
 
+  // handle @font-face declarations
+  var fontface = {
+    counter: 0,
+    isFontFace: function (selector) {
+      return selector.match('@font-face');
+    },
+    tmpFix: function (selector) {
+      var sel = selector + this.counter;
+      this.counter++;
+      return sel;
+    },
+    tmpUnFix: function (selector) {
+      return selector.replace(/\d+$/, '');
+    }
+  };
+
   var Css2Stylus = {
     // constructor
     Converter: function (css) {
@@ -21,63 +37,54 @@
     }
   };
 
-  Css2Stylus.Converter.prototype = Css2Stylus.prototype = {
+  Css2Stylus.Converter.prototype = {
 
     // default options
-    options: {
+    defaults: {
       // possible indent values: 'tab' or number (of spaces)
-      indent: 2,
+      indent: '2',
       cssSyntax: false,
       openingBracket: '',
       closingBracket: '',
       semicolon: '',
       eol: '',
-      unPrefix: false
+      unPrefix: false,
+      keepColons: false
     },
 
     processCss: function (options) {
       if (!this.css) {
         return this.css;
       }
-      options = options || {};
 
-      if (options.indent) {
-        this.options.indent = options.indent;
-      }
+      this.options = this._extend({}, this.defaults, options);
 
       // keep css punctuation
-      if (options.cssSyntax === true) {
+      if (this.options.cssSyntax === true) {
         this.options.openingBracket = '{';
         this.options.closingBracket = '}';
         this.options.semicolon = ':';
         this.options.eol = ';';
-      } else if (options.cssSyntax === false) {
-        this.options.openingBracket = '';
-        this.options.closingBracket = '';
-        this.options.semicolon = '';
-        this.options.eol = '';
+      } else if (this.options.cssSyntax === false) {
+        this.options.semicolon = this.options.keepColons ? ':' : '';
       }
 
       // indentation
       if (this.options.indent === 'tab') {
         this.indentation = '\t';
       } else {
-        this.indentation = this.repeat(' ', this.options.indent);
+        this.indentation = this._repeat(' ', this.options.indent);
       }
 
-      // keep or remove vendor prefixes
-      this.options.unPrefix = options.unPrefix || false;
-
-      // actualy parse css
-      this.parse();
+      // parse css
+      this._parse();
 
       return this;
     },
 
-    parse: function () {
-      var tree = { children: {} },
-        self = this;
-
+    _parse: function () {
+      var tree = { children: {} };
+      var self = this;
 
       this.css
         // remove comments
@@ -90,14 +97,14 @@
 
           // remove prefixes
           if (self.options.unPrefix) {
-            declaration = self.unPrefix(declaration);
+            declaration = self._unPrefix(declaration);
           }
 
-          selector = self.trim(selector);
+          selector = self._trim(selector);
 
           // skip grouped selector
           if (/,/.test(selector)) {
-            path = self.addRule(path, selector);
+            path = self._addRule(path, selector);
 
           // process
           } else {
@@ -111,22 +118,22 @@
             for (i = 0, l = selectors.length; i < l; i++) {
               // fix back special chars
               _sel = selectors[i].replace(/&(.)/g, '& $1 ').replace(/& ([:\.]) /g, '&$1');
-              path = self.addRule(path, _sel);
+              path = self._addRule(path, _sel);
             }
           }
 
           declaration.replace(/([^:;]+):([^;]+)/g, function (_declaration, property, value) {
             path.declarations.push({
-              property: self.trim(property),
-              value: self.trim(value)
+              property: self._trim(property),
+              value: self._trim(value)
             });
           });
         });
 
-      this.output = this.generateOutput(tree);
+      this.output = this._generateOutput(tree);
     },
 
-    unPrefix: function (declaration) {
+    _unPrefix: function (declaration) {
       var propValues = {};
 
       declaration = declaration.replace(/-\w*-(.*)/g, function (wholeMatch, propValue) {
@@ -142,30 +149,38 @@
       return declaration;
     },
 
-    addRule: function (path, selector) {
+    _counter: 0,
+    _addRule: function (path, selector) {
+      if (fontface.isFontFace(selector)) {
+        selector = fontface.tmpFix(selector);
+      }
       return (path.children[selector] = path.children[selector] || { children: {}, declarations: [] });
     },
 
-    depth: 0,
-    generateOutput: function (tree) {
+    _depth: 0,
+    _generateOutput: function (tree) {
       var output = '', key, j, l, declarations, declaration,
-        openingBracket = (this.options.openingBracket ? ' ' + this.options.openingBracket : '');
-
+        openingBracket = (this.options.openingBracket ? ' ' + this.options.openingBracket : ''),
+        sel;
 
       for (key in tree.children) {
         if (tree.children.hasOwnProperty(key)) {
-          output += this.getIndent() + key + openingBracket + '\n';
-          this.depth++;
+          sel = key;
+          if (fontface.isFontFace(key)) {
+            sel = fontface.tmpUnFix(key);
+          }
+          output += this._getIndent() + sel + openingBracket + '\n';
+          this._depth++;
           declarations = tree.children[key].declarations;
 
           for (j = 0, l = declarations.length; j < l; j++) {
             declaration = declarations[j];
-            output += this.getIndent() + declaration.property + this.options.semicolon + ' ' + declaration.value + this.options.eol + '\n';
+            output += this._getIndent() + declaration.property + this.options.semicolon + ' ' + declaration.value + this.options.eol + '\n';
           }
 
-          output += this.generateOutput(tree.children[key]);
-          this.depth--;
-          output += this.getIndent() + this.options.closingBracket + '\n' + (this.depth === 0 ? '$n' : '');
+          output += this._generateOutput(tree.children[key]);
+          this._depth--;
+          output += this._getIndent() + this.options.closingBracket + '\n' + (this._depth === 0 ? '$n' : '');
         }
       }
 
@@ -176,8 +191,8 @@
     },
 
     // calculate correct indent
-    getIndent: function () {
-      return this.repeat(this.indentation, this.depth);
+    _getIndent: function () {
+      return this._repeat(this.indentation, this._depth);
     },
 
     // returns stylus output
@@ -186,15 +201,27 @@
     },
 
     // string helpers
-    trim: function (str) {
-      // trim tabs and spaces
+    _trim: function (str) {
+      // _trim tabs and spaces
       return str.replace(/\t+/, ' ').replace(/^\s+|\s+$/g, '');
     },
 
-    // repeat same string n times
-    repeat: function (str, n) {
+    // _repeat same string n times
+    _repeat: function (str, n) {
       n = window.parseInt(n, 10);
       return new Array(n + 1).join(str);
+    },
+
+    // extend objects
+    _extend: function () {
+      for (var i = 1; i < arguments.length; i++) {
+        for (var key in arguments[i]) {
+          if (arguments[i].hasOwnProperty(key)) {
+            arguments[0][key] = arguments[i][key];
+          }
+        }
+      }
+      return arguments[0];
     }
   };
 
