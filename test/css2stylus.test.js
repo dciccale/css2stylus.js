@@ -3,6 +3,7 @@
 var assert = require('assert');
 
 var Css2Stylus = require('../lib/css2stylus');
+var fs = require('fs');
 
 exports['Should convert CSS into Stylus'] = function (test) {
  var css = 'body { color: red; }';
@@ -10,5 +11,15 @@ exports['Should convert CSS into Stylus'] = function (test) {
   converter.processCss();
   var stylusOutput = converter.getStylus();
   test.equal(stylusOutput, 'body\n  color red\n\n');
+  test.done();
+};
+
+exports['Should handle multiple @font-face declarations'] = function (test) {
+  var css = fs.readFileSync('./test/fixture/font-face.css').toString();
+  var styl = fs.readFileSync('./test/expected/font-face.styl').toString();
+  var converter = new Css2Stylus.Converter(css);
+  converter.processCss();
+  var output = converter.getStylus();
+  test.equal(output, styl);
   test.done();
 };

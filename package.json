@@ -1,7 +1,7 @@
 {
   "name": "css2stylus",
   "description": "Converts CSS to Stylus.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "homepage": "http://css2stylus.com",
   "author": {
     "name": "Denis Ciccale",
