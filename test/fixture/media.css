@@ -1,0 +1,5 @@
+@media(min-width: 1200px) {
+	.timeline>li {
+		min-height: 170px;
+	}
+}
