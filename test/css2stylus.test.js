@@ -42,7 +42,7 @@ exports['Should handle @media declarations'] = function (test) {
   var converter = new Css2Stylus.Converter(css);
   converter.processCss();
   var output = converter.getStylus();
-  console.log(output);
+  // console.log(output);
   test.equal(output, styl);
   test.done();
 };

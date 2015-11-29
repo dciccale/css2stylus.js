@@ -3,3 +3,9 @@
 		min-height: 170px;
 	}
 }
+
+@media(max-width: 767px) {
+	before {
+		left: 40px;
+	}
+}
