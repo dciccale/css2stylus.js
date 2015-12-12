@@ -42,5 +42,5 @@ exports['Should handle @media declarations'] = function (test) {
   RunTest(test, 'media', false);
 };
 exports['Tested code posted to Github Issue'] = function (test) {
-  RunTest(test, 'GithubIssue', true);
+  RunTest(test, 'GithubIssue', false);
 };
