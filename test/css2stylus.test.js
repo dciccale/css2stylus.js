@@ -48,3 +48,16 @@ exports['Should handle @media declarations'] = function (test) {
   test.equal(output, styl);
   test.done();
 };
+
+// exports['Should handle denis example'] = function (test) {
+//   var css = fs.readFileSync('./test/fixture/denis.css').toString();
+//   var styl = fs.readFileSync('./test/expected/denis.styl').toString();
+//   var converter = new Css2Stylus.Converter(css);
+//   converter.processCss();
+//   var output = converter.getStylus();
+//   console.log('    ');
+//   console.log('### Output ###');
+//   console.log(output);
+//   test.equal(output, styl);
+//   test.done();
+// };

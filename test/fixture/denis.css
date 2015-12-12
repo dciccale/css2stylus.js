@@ -2,12 +2,12 @@
   before {
     left: 40px;
   }
+  ul.timeline > li {
+	  margin-bottom: 20px;
+	  position: relative;
+	  width: 100%;
+	  float: left;
+	  clear: left;
+	}
 }
 
-ul.timeline > li {
-  margin-bottom: 20px;
-  position: relative;
-  width: 100%;
-  float: left;
-  clear: left;
-}
