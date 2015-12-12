@@ -30,15 +30,15 @@ function RunTest(test, FileName, debug) {
 //   test.equal(stylusOutput, 'body\n  color red\n\n');
 //   test.done();
 // };
-exports['Should handle :hover'] = function (test) {
-  RunTest(test, 'hover', true);
-};
+// exports['Should handle :hover'] = function (test) {
+//   RunTest(test, 'hover', true);
+// };
 // exports['Should handle multiple @font-face declarations'] = function (test) {
 //   RunTest(test, 'font-face', true);
 // };
-// exports['Should handle @media declarations'] = function (test) {
-//   RunTest(test, 'media', true);
+exports['Should handle @media declarations'] = function (test) {
+  RunTest(test, 'media', true);
+};
+// exports["Should handle denis' example"] = function (test) {
+//   RunTest(test, 'denis', true);
 // };
-// // exports["Should handle denis' example"] = function (test) {
-// //   RunTest(test, 'denis', true);
-// // };
