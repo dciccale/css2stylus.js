@@ -2,8 +2,8 @@
 
 var assert = require('assert');
 
-// var Css2Stylus = require('../lib/css2stylus');
-var Css2Stylus = require('../lib/archive');
+var Css2Stylus = require('../lib/css2stylus');
+// var Css2Stylus = require('../lib/debug');
 var fs = require('fs');
 
 // Shorthand for repeated test scripts
