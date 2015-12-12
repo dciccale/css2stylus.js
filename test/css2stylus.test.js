@@ -22,23 +22,23 @@ function RunTest(test, FileName, debug) {
 }
 
 // List of unit tests
-// exports['Should convert CSS into Stylus'] = function (test) {
-//   var css = 'body { color: red; }';
-//   var converter = new Css2Stylus.Converter(css);
-//   converter.processCss();
-//   var stylusOutput = converter.getStylus();
-//   test.equal(stylusOutput, 'body\n  color red\n\n');
-//   test.done();
-// };
-// exports['Should handle :hover'] = function (test) {
-//   RunTest(test, 'hover', true);
-// };
-// exports['Should handle multiple @font-face declarations'] = function (test) {
-//   RunTest(test, 'font-face', true);
-// };
-exports['Should handle @media declarations'] = function (test) {
-  RunTest(test, 'media', true);
+exports['Should convert CSS into Stylus'] = function (test) {
+  var css = 'body { color: red; }';
+  var converter = new Css2Stylus.Converter(css);
+  converter.processCss();
+  var stylusOutput = converter.getStylus();
+  test.equal(stylusOutput, 'body\n  color red\n\n');
+  test.done();
 };
-// exports["Should handle denis' example"] = function (test) {
-//   RunTest(test, 'denis', true);
-// };
+exports['Should handle :hover'] = function (test) {
+  RunTest(test, 'hover', false);
+};
+exports['Should handle multiple @font-face declarations'] = function (test) {
+  RunTest(test, 'font-face', false);
+};
+exports['Should handle @media declarations'] = function (test) {
+  RunTest(test, 'media', false);
+};
+exports["Should handle denis' example"] = function (test) {
+  RunTest(test, 'denis', false);
+};
