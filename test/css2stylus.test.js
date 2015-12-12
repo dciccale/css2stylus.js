@@ -36,9 +36,11 @@ exports['Should handle :hover'] = function (test) {
 exports['Should handle multiple @font-face declarations'] = function (test) {
   RunTest(test, 'font-face', false);
 };
+
+// Test for @media support
 exports['Should handle @media declarations'] = function (test) {
   RunTest(test, 'media', false);
 };
-exports["Should handle denis' example"] = function (test) {
-  RunTest(test, 'denis', false);
+exports['Tested code posted to Github Issue'] = function (test) {
+  RunTest(test, 'GithubIssue', true);
 };
