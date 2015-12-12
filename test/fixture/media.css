@@ -8,4 +8,7 @@
 	before {
 		left: 40px;
 	}
+	after {
+		right: 100px;
+	}
 }

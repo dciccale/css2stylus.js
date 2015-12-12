@@ -1,0 +1,13 @@
+@media (max-width: 767px) {
+  before {
+    left: 40px;
+  }
+}
+
+ul.timeline > li {
+  margin-bottom: 20px;
+  position: relative;
+  width: 100%;
+  float: left;
+  clear: left;
+}
