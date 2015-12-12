@@ -42,6 +42,7 @@
   },
   "preferGlobal": "true",
   "dependencies": {
+    "jsonfile": "^2.2.3",
     "yargs": "3.*.*"
   },
   "devDependencies": {
