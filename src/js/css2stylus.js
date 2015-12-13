@@ -6,6 +6,9 @@
  * https://github.com/dciccale/css2stylus.js/blob/master/LICENSE.txt
  */
 (function (window) {
+  // Parse @media blocks
+  // First: create map for media parameters to a legal class name (i.e. no '(' or '@')
+  var mediaDeclarations = [];
 
   // use global as window in node
   if (typeof global === 'object' && global && global.global === global) {
@@ -83,12 +86,40 @@
     },
 
     _parse: function () {
-      var tree = { children: {} };
+      var tree = {children: {}};
       var self = this;
 
       this.css
         // remove comments
         .replace(/\/\*[\s\S]*?\*\//gm, '')
+
+        // Parse @media blocks
+        // Second: Remove '@media ... {', remove extra '}', and add mapped 'Media(#)' as a pseudo-class name
+        .replace(/@media[^@]+/gi, function (group/* , selector, declaration */) {
+          // Remove '@media ... {'  declaration
+          var mediaBlockAndCss = group.replace(/@media[^{]+\{/gi, function (group) {
+            // Remove final '{' of '@media ... {' and store for later
+            mediaDeclarations.push(group.slice(0, -1).trim());
+            return '';
+          });
+          // Add the incremented media pseudo-class
+          mediaBlockAndCss = mediaBlockAndCss.replace(/[^\n]+\{/gm, function (group/* , selector, declaration */) {
+            // Clever trick from Stack Overflow: http://stackoverflow.com/a/8043061
+            var increment = ('00' + mediaDeclarations.length).slice(-3);
+            group = 'media' + increment + ' ' + group;
+            return group;
+          });
+          // Remove last '}' of '@media ... { ... }', but first of extra CSS section (Note: don't drop extra CSS)
+          mediaBlockAndCss = mediaBlockAndCss.replace(/\}[^{]*\}[^@]*/gi, function (group) {
+            // Remove first bracket of extra css following the @media block
+            group = group.substring(1);
+            // Remove any media pseudo-classes
+            group = group.replace(/media\d+\s/gm, '');
+            return group;
+          });
+          return mediaBlockAndCss;
+        })
+
         // process each css block
         .replace(/([^{]+)\{([^}]+)\}/g, function (group, selector, declaration) {
           var i, l, _sel,
@@ -137,12 +168,16 @@
       var propValues = {};
 
       declaration = declaration.replace(/-\w*-(.*)/g, function (wholeMatch, propValue) {
+        var pv;
+
         if (propValues[propValue]) {
-          return '';
+          pv = '';
         } else {
           propValues[propValue] = 1;
-          return propValue;
+          pv = propValue;
         }
+
+        return pv;
       })
         .replace(/^(.*)[\s\n]+\1/gm, '$1');
 
@@ -151,17 +186,22 @@
 
     _counter: 0,
     _addRule: function (path, selector) {
+      var p;
+
       if (fontface.isFontFace(selector)) {
         selector = fontface.tmpFix(selector);
       }
-      return (path.children[selector] = path.children[selector] || { children: {}, declarations: [] });
+
+      p = (path.children[selector] = path.children[selector] || {children: {}, declarations: []});
+
+      return p;
     },
 
     _depth: 0,
     _generateOutput: function (tree) {
-      var output = '', key, j, l, declarations, declaration,
-        openingBracket = (this.options.openingBracket ? ' ' + this.options.openingBracket : ''),
-        sel;
+      var output = '';
+      var openingBracket = (this.options.openingBracket ? ' ' + this.options.openingBracket : '');
+      var key, j, l, declarations, declaration, sel;
 
       for (key in tree.children) {
         if (tree.children.hasOwnProperty(key)) {
@@ -185,7 +225,14 @@
       }
 
       // remove blank lines (http://stackoverflow.com/a/4123442)
-      output = output.replace(/^\s*$[\n\r]{1,}/gm, '').replace(/\$n/g, '\n')//.replace(/\n$/, '');
+      output = output.replace(/^\s*$[\n\r]{1,}/gm, '').replace(/\$n/g, '\n'); // .replace(/\n$/, '');
+
+      // Parse @media blocks
+      // Third: Replace incremented 'Media(#)' pseudo-class with saved @media declaration
+      output = output.replace(/media\d+/gm, function (group) {
+        var increment = Number(group.substring(5, 8)) - 1;
+        return mediaDeclarations[increment];
+      });
 
       return output;
     },
@@ -238,5 +285,4 @@
       return window.Css2Stylus;
     });
   }
-
 }).call(this, this);
