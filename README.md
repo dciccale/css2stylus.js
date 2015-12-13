@@ -97,5 +97,15 @@ Unprefix any CSS snippet with vendor prefixes by passing `--unPrefix` option fro
 
 Or pass an options object when processing a CSS file from JavaScript `converter.processCss({ unPrefix: true });`
 
+## Development
+
+To contribute, clone the repo, create a new branch and submit a PR.
+
+### Run tests
+
+```sh
+$ npm t
+```
+
 ## License
 See [LICENSE.txt](https://raw.github.com/dciccale/css2stylus.js/master/LICENSE.txt)

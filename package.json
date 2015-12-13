@@ -1,7 +1,7 @@
 {
   "name": "css2stylus",
   "description": "Converts CSS to Stylus.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "homepage": "http://css2stylus.com",
   "author": {
     "name": "Denis Ciccale",
@@ -38,14 +38,23 @@
     "css2stylus": "./bin/css2stylus"
   },
   "scripts": {
-    "test": "./node_modules/.bin/nodeunit test/*.js"
+    "test": "./node_modules/.bin/xo && ./node_modules/.bin/nodeunit test/*.js"
   },
   "preferGlobal": "true",
   "dependencies": {
     "yargs": "3.*.*"
   },
   "devDependencies": {
-    "nodeunit": "^0.9.1"
+    "nodeunit": "^0.9.1",
+    "xo": "^0.11.2"
+  },
+  "xo": {
+    "space": "2",
+    "rules": {
+      "no-inline-comments": 0,
+      "padded-blocks": 0,
+      "one-var": 0
+    }
   },
   "keywords": [
     "css2stylus",
