@@ -55,7 +55,7 @@ This is useful for integrating the binary with Vim or another editor of your cho
 Supports bash-style piping from stdin to stdout.
 Useful for integrating into an editor of choice.
 
-``sh
+```sh
 $ cat myFile.css | css2stylus
 ```
 
@@ -63,7 +63,7 @@ $ cat myFile.css | css2stylus
 
 To convert the selected CSS to stylus inside vim use the following mapping:
 
-```
+```vimL
 " CSS2Stylus
 :vnoremap <leader>cs :!css2stylus -u<cr><esc>
 ```
