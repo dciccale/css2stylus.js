@@ -1,0 +1,8 @@
+a.OUT_FOR_DAY.primary-button {
+  padding: 30px;
+  background-color: #f06060;
+  box-shadow: 0px 10px 0px 0px #cd1313;
+}
+a.OUT_FOR_DAY.primary-button:hover {
+  background-color: #ed4444 !important;
+}
