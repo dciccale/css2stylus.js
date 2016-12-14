@@ -38,7 +38,10 @@
     "css2stylus": "./bin/css2stylus"
   },
   "scripts": {
-    "test": "./node_modules/.bin/xo && ./node_modules/.bin/nodeunit test/*.js"
+    "test": "./node_modules/.bin/xo && ./node_modules/.bin/nodeunit test/*.js",
+    "publish-patch": "npm version patch && npm publish",
+    "publish-minor": "npm version minor && npm publish",
+    "publish-major": "npm version major && npm publish"
   },
   "preferGlobal": "true",
   "dependencies": {
