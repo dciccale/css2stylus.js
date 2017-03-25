@@ -6,7 +6,7 @@ Node/Browser compatible.
 
 ## Demo
 
-###Try it online [css2stylus.com](http://css2stylus.com)
+Try it online [dciccale.github.io/css2stylus.js/](http://dciccale.github.io/css2stylus.js/)
 
 ## Usage
 
